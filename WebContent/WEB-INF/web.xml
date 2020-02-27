@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?> <!-- 使用するxmlのバージョンと、文字コードの宣言 -->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1"> <!-- Tomcat バージョン8で使われるヘッダー文　内容→xmls:xsi/schemaLocationが属している名前空間xsiの定義　xmlns/名前空間(同名クラスの衝突を避けるためのパッケージ的なもの)の名前の定義　xsi/先で設定した名前空間の定義内容が入っているファイル参照先 -->
+
+<!-- web.xml:動的Webプロジェクト作成時に自動的に作られる設定ファイル -->
+<!-- サイトアクセスする際、最初に表字する画面ファイル(JSPファイル)や、 -->
+<!-- プロジェクトでStruts2を使用することを示す設定を記述します。 -->
+<!-- Strutsフレームワーク以外でも利用される設定ファイルです。 -->
+
+
+	<!-- display-name:プロジェクト名 -->
+	<display-name>ecsite</display-name>
+
+	<!-- welcome-file:最初に表示するJSPファイル -->
+	<welcome-file-list>
+	<!-- welcome-file-listで囲まれたwelcome-fileのファイルがはじめに開かれるページになる(複数指定可能) -->
+		<welcome-file>home.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!-- struts2を使うための設定 -->
+	<!-- Webアプリケーションの中のweb.xmlを使って、フィルタに書かれてるものをアプリケーションの一部として設定する。　そのフィルタをWebアプリケーションのurlパターンや特定のサーブレットにマッピングできる -->
+	<!-- 簡単に言えば、struts2使うよ宣言 -->
+	<filter>
+		<!-- 下のfilter-nameと同じ名前にする事により、filter-classとurl-patterをマッピング -->
+		<filter-name>struts2</filter-name>
+		<!--struts2の制御担当クラス-->
+		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</filter>
+
+	<!-- 設定ファイル -->
+	<filter-mapping>
+		<!-- 上のfilter-nameと同じ名前にする事により、filter-classとurl-patterをマッピング -->
+		<filter-name>struts2</filter-name>
+		<!-- 全てのURLにマッチします。 -->
+		<!-- /*で、このプロジェクトの配下全てという意味　このプロジェクト全てでstruts2を使いますという意味になる -->
+		<!-- struts.xmlで使うurlは全て(*)対象だよって宣言 -->
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+</web-app>
+
